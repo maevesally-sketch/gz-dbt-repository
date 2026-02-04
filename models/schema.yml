@@ -52,4 +52,39 @@
              description : "logistical costs"
            - name: ship_cost
              description : "ship_cost"
+ models: 
+    - name: int_orders_margin
+      description: "adding margin and purchase cost and aggregating by order"
+      columns:
+        - name: orders_id
+          description: "orders id"
+          tests:
+            - unique
+            - not_null
+           
+    - name: int_sales_margin
+      description: "adding margin and purchase cost to sales data"
+      columns:
+        - name: products_id
+          description: "product id"
+          tests:
+            - not_null 
 
+    - name: int_orders_operational
+      description: "adding operational margin to orders data"
+      columns:
+        - name: orders_id
+          description: "orders_id"
+          tests:
+                - not_null 
+                - unique
+
+    - name: finance_days
+      description: "aggregating relevant finance information by date"
+      columns:
+          - name: date_date
+            description: "date"
+            tests:
+                - not_null 
+                - unique
+                   

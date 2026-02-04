@@ -19,7 +19,8 @@ product_count AS (
     GROUP BY date_date
 )
 SELECT 
-int.total_number_of_transactions
+int.date_date
+,int.total_number_of_transactions
 , int.total_revenue
 , int.average_basket
 , int.operational_margin
