@@ -12,6 +12,7 @@
      tables:
        - name: sales
          identifier: raw_gz_sales
+        
        - name: product
          identifier: raw_gz_product
        - name: ship
