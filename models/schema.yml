@@ -12,8 +12,44 @@
      tables:
        - name: sales
          identifier: raw_gz_sales
+         description: "sales data"
+         columns:
+           - name: date_date
+             description : "date of sale"
+           - name: orders_id
+             description : "identifier for the order"
+           - name: pdt_id
+             description : "product identifier"
+           - name: revenue
+             description : "renevue generated"
+           - name: quantity
+             description : quantity products purchased
         
        - name: product
          identifier: raw_gz_product
+         description: "product data"
+         columns:
+           - name: products_id
+             description : "product identifier"
+             tests:
+               - unique
+               - not_null
+               
+           - name: purchse_price
+             description : "price per product"
        - name: ship
          identifier: raw_gz_ship
+         description: "ship data"
+         columns:
+           - name: orders_id
+             description : "identifier for the order"
+             tests:
+               - unique
+               - not_null
+           - name: shipping_fee
+             description : "shipping fee charged to customer"
+           - name: logcost
+             description : "logistical costs"
+           - name: ship_cost
+             description : "ship_cost"
+
