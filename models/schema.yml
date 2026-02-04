@@ -1,0 +1,18 @@
+ # schema.yml
+
+ version: 2
+
+ sources:
+   - name: raw
+     database: ringed-reserve-484810-n3
+     schema:  gz_raw_data
+     loader: bigquery
+     description: "raw source data Greenweez" 
+
+     tables:
+       - name: sales
+         identifier: raw_gz_sales
+       - name: product
+         identifier: raw_gz_product
+       - name: ship
+         identifier: raw_gz_ship
