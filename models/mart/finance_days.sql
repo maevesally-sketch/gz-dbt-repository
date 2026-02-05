@@ -19,7 +19,7 @@ product_count AS (
     GROUP BY date_date
 )
 SELECT 
-int.date_date
+int.date_date AS date
 ,int.total_number_of_transactions
 , int.total_revenue
 , int.average_basket
