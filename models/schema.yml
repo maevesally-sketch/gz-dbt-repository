@@ -8,122 +8,175 @@
      schema:  gz_raw_data
      loader: bigquery
      description: "raw source data Greenweez" 
-
+     
      tables:
-       - name: sales
-         identifier: raw_gz_sales
-         description: "sales data"
-         columns:
-          - name: date_date
-            description : "date of sale"
-          - name: orders_id
-            description : "identifier for the order"
-          - name: pdt_id
-            description : "product identifier"
-          - name: revenue
-            description : "renevue generated"
-          - name: quantity
+        - name: sales
+          identifier: raw_gz_sales
+          description: "sales data"
+          tests:
+            - dbt_utils.unique_combination_of_columns:
+                arguments:
+                  combination_of_columns:
+                     - date_date
+                     - orders_id
+                     - pdt_id
+          columns:
+           - name: date_date
+             description : "date of sale"
+           - name: orders_id
+             description : "identifier for the order"
+           - name: pdt_id
+             description : "product identifier"
+           - name: revenue
+             description : "renevue generated"
+           - name: quantity
              description : quantity products purchased
         
-       - name: product
-         identifier: raw_gz_product
-         description: "product data"
-         columns:
-          - name: products_id
-            description : "product identifier"
-            tests:
-              - unique
-              - not_null
+        - name: product
+          identifier: raw_gz_product
+          description: "product data"
+          columns:
+           - name: products_id
+             description : "product identifier"
+             tests:
+               - unique
+               - not_null
                
-          - name: purchse_price
-            description : "price per product"
-       - name: ship
-         identifier: raw_gz_ship
-         description: "ship data"
-         columns:
-          - name: orders_id
-            description : "identifier for the order"
-            tests:
-              - unique
+           - name: purchse_price
+             description : "price per product"
+
+        - name: ship
+          identifier: raw_gz_ship
+          description: "ship data"
+          columns:
+           - name: orders_id
+             description : "identifier for the order"
+             tests:
+               - unique
+               - not_null
+           - name: shipping_fee
+             description : "shipping fee charged to customer"
+           - name: logcost
+             description : "logistical costs"
+           - name: ship_cost
+             description : "ship_cost"
+
+        - name: facebook
+          identifier: raw_gw_facebook
+          description: "facebook ads campaigns"
+          tests:
+            - dbt_utils.unique_combination_of_columns:
+                arguments:
+                  combination_of_columns:
+                     - date_date
+                     - campaign_key
+          columns:
+           - name: date_date
+             description : date of campaign
+             tests:
               - not_null
-          - name: shipping_fee
-            description : "shipping fee charged to customer"
-          - name: logcost
-            description : "logistical costs"
-          - name: ship_cost
-            description : "ship_cost"
-       - name: facebook
-         identifier: raw_gw_facebook
-         description: "facebook ads campaigns"
-         columns:
-          - name: date_date
-            description : date of campaign
-          - name: paid_source
-            description : description of source
-          - name: campaign_key
-            description : campaign key or identifier
-          - name: camPGN_name
-            description : campaign name
-          - name: ads_cost
-            description: cost of campaign
-          - name: impression
-            description: count of impressions
-          - name: click
-            description: count of clicks
-       - name: adwords
-         identifier: raw_gz_adwords
-         description: "adwords ads campaigns"
-         columns:
-          - name: date_date
-            description : date of campaign
-          - name: paid_source
-            description : description of source
-          - name: campaign_key
-            description : campaign key or identifier
-          - name: camPGN_name
-            description : campaign name
-          - name: ads_cost
-            description: cost of campaign
-          - name: impression
-            description: count of impressions
-          - name: click
-            description: count of clicks
-       - name: bing
-         identifier: raw_gz_bing
-         description: "bing ads campaigns"
-         columns:
-          - name: date_date
-            description : date of campaign
-          - name: paid_source
-            description : description of source
-          - name: campaign_key
-            description : campaign key or identifier
-          - name: camPGN_name
-            description : campaign name
-          - name: ads_cost
-            description: cost of campaign
-          - name: impression
-            description: count of impressions
-          - name: click
-            description: count of clicks      
-       - name: criteo
-         identifier: raw_gz_criteo
-         description: "criteo ads campaigns"
-         columns:
-          - name: date_date
-            description : date of campaign
-          - name: paid_source
-            description : description of source
-          - name: campaign_key
-            description : campaign key or identifier
-          - name: camPGN_name
-            description : campaign name
-          - name: ads_cost
-            description: cost of campaign
-          - name: impression
-            description: count of impressions
-          - name: click
-            description: count of clicks                  
+                
+           - name: paid_source
+             description : description of source
+           - name: campaign_key
+             description : campaign key or identifier
+             tests:
+              - not_null
+           - name: camPGN_name
+             description : campaign name
+           - name: ads_cost
+             description: cost of campaign
+           - name: impression
+             description: count of impressions
+           - name: click
+             description: count of clicks
+
+        - name: adwords
+          identifier: raw_gz_adwords
+          description: "adwords ads campaigns"
+          tests:
+            - dbt_utils.unique_combination_of_columns:
+                arguments:
+                  combination_of_columns:
+                     - date_date
+                     - campaign_key
+          columns:
+           - name: date_date
+             description : date of campaign
+             tests:
+              - not_null
+           - name: paid_source
+             description : description of source
+           - name: campaign_key
+             description : campaign key or identifier
+             tests:
+              - not_null
+           - name: camPGN_name
+             description : campaign name
+           - name: ads_cost
+             description: cost of campaign
+           - name: impression
+             description: count of impressions
+           - name: click
+             description: count of clicks
+
+        - name: bing
+          identifier: raw_gz_bing
+          description: "bing ads campaigns"
+          tests:
+            - dbt_utils.unique_combination_of_columns:
+                arguments:
+                  combination_of_columns:
+                     - date_date
+                     - campaign_key
+          columns:
+           - name: date_date
+             description : date of campaign
+             tests:
+              - not_null
+           - name: paid_source
+             description : description of source
+           - name: campaign_key
+             description : campaign key or identifier
+             tests:
+              - not_null
+           - name: camPGN_name
+             description : campaign name
+           - name: ads_cost
+             description: cost of campaign
+           - name: impression
+             description: count of impressions
+           - name: click
+             description: count of clicks  
+
+        - name: criteo
+          identifier: raw_gz_criteo
+          description: "criteo ads campaigns"
+          tests:
+            - dbt_utils.unique_combination_of_columns:
+                arguments:
+                  combination_of_columns:
+                     - date_date
+                     - campaign_key
+          columns:
+           - name: date_date
+             description : date of campaign
+             tests:
+              - not_null
+           - name: paid_source
+             description : description of source
+           - name: campaign_key
+             description : campaign key or identifier
+             tests:
+              - not_null
+           - name: camPGN_name
+             description : campaign name
+           - name: ads_cost
+             description: cost of campaign
+           - name: impression
+             description: count of impressions
+           - name: click
+             description: count of clicks                  
  models: 
     - name: int_orders_margin
       description: "adding margin and purchase cost and aggregating by order"
@@ -154,9 +207,45 @@
     - name: finance_days
       description: "aggregating relevant finance information by date"
       columns:
-          - name: date
-            description: "date"
-            tests:
-                - not_null 
-                - unique
-                   
+        - name: date
+          description: "date"
+          tests:
+           - not_null 
+           - unique
+
+    - name: int_campaigns
+      description: "union of 4 ads raw tables"
+      columns:
+        - name: date_date
+          description: "date"
+          tests:
+           - not_null 
+        - name: paid_source
+          description: source of campaign
+        - name: campaing_key
+          description: campaign_key
+        - name: campgn_name
+          description: name of campaign
+        - name: ads_cost
+          description: cost of campaign
+        - name: impression
+          description: impressions
+        - name: click
+          description: click
+
+    - name: int_campaigns_day
+      description: aggregation of campaigns per day in descending order
+      columns:
+        - name: date_date
+          description: "date"
+          tests:
+           - not_null
+           - unique 
+        - name: ads_cost
+          description: ads cost per day
+        - name: impression
+          description: impressions per day
+        - name: click
+          description: clicks per day                          
+    - name: finance_campaigns_day
+      description: aggregation of finance day table and ads data to include ads margin per day

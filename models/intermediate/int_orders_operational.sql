@@ -21,6 +21,7 @@ orders_id
 ,margin
 , shipping_fee
 , logcost
+, ship_cost
 ,ROUND(margin + shipping_fee - logcost - ship_cost,2) AS operational_margin
 FROM join_ship
 
