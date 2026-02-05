@@ -14,44 +14,116 @@
          identifier: raw_gz_sales
          description: "sales data"
          columns:
-           - name: date_date
-             description : "date of sale"
-           - name: orders_id
-             description : "identifier for the order"
-           - name: pdt_id
-             description : "product identifier"
-           - name: revenue
-             description : "renevue generated"
-           - name: quantity
+          - name: date_date
+            description : "date of sale"
+          - name: orders_id
+            description : "identifier for the order"
+          - name: pdt_id
+            description : "product identifier"
+          - name: revenue
+            description : "renevue generated"
+          - name: quantity
              description : quantity products purchased
         
        - name: product
          identifier: raw_gz_product
          description: "product data"
          columns:
-           - name: products_id
-             description : "product identifier"
-             tests:
-               - unique
-               - not_null
+          - name: products_id
+            description : "product identifier"
+            tests:
+              - unique
+              - not_null
                
-           - name: purchse_price
-             description : "price per product"
+          - name: purchse_price
+            description : "price per product"
        - name: ship
          identifier: raw_gz_ship
          description: "ship data"
          columns:
-           - name: orders_id
-             description : "identifier for the order"
-             tests:
-               - unique
-               - not_null
-           - name: shipping_fee
-             description : "shipping fee charged to customer"
-           - name: logcost
-             description : "logistical costs"
-           - name: ship_cost
-             description : "ship_cost"
+          - name: orders_id
+            description : "identifier for the order"
+            tests:
+              - unique
+              - not_null
+          - name: shipping_fee
+            description : "shipping fee charged to customer"
+          - name: logcost
+            description : "logistical costs"
+          - name: ship_cost
+            description : "ship_cost"
+       - name: facebook
+         identifier: raw_gw_facebook
+         description: "facebook ads campaigns"
+         columns:
+          - name: date_date
+            description : date of campaign
+          - name: paid_source
+            description : description of source
+          - name: campaign_key
+            description : campaign key or identifier
+          - name: camPGN_name
+            description : campaign name
+          - name: ads_cost
+            description: cost of campaign
+          - name: impression
+            description: count of impressions
+          - name: click
+            description: count of clicks
+       - name: adwords
+         identifier: raw_gz_adwords
+         description: "adwords ads campaigns"
+         columns:
+          - name: date_date
+            description : date of campaign
+          - name: paid_source
+            description : description of source
+          - name: campaign_key
+            description : campaign key or identifier
+          - name: camPGN_name
+            description : campaign name
+          - name: ads_cost
+            description: cost of campaign
+          - name: impression
+            description: count of impressions
+          - name: click
+            description: count of clicks
+       - name: bing
+         identifier: raw_gz_bing
+         description: "bing ads campaigns"
+         columns:
+          - name: date_date
+            description : date of campaign
+          - name: paid_source
+            description : description of source
+          - name: campaign_key
+            description : campaign key or identifier
+          - name: camPGN_name
+            description : campaign name
+          - name: ads_cost
+            description: cost of campaign
+          - name: impression
+            description: count of impressions
+          - name: click
+            description: count of clicks      
+       - name: criteo
+         identifier: raw_gz_criteo
+         description: "criteo ads campaigns"
+         columns:
+          - name: date_date
+            description : date of campaign
+          - name: paid_source
+            description : description of source
+          - name: campaign_key
+            description : campaign key or identifier
+          - name: camPGN_name
+            description : campaign name
+          - name: ads_cost
+            description: cost of campaign
+          - name: impression
+            description: count of impressions
+          - name: click
+            description: count of clicks                  
  models: 
     - name: int_orders_margin
       description: "adding margin and purchase cost and aggregating by order"
