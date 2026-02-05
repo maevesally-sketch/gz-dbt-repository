@@ -82,7 +82,7 @@
     - name: finance_days
       description: "aggregating relevant finance information by date"
       columns:
-          - name: date_date
+          - name: date
             description: "date"
             tests:
                 - not_null 
