@@ -1,0 +1,90 @@
+ # schema.yml
+
+ version: 2
+
+ sources:
+   - name: raw
+     database: ringed-reserve-484810-n3
+     schema:  gz_raw_data
+     loader: bigquery
+     description: "raw source data Greenweez" 
+
+     tables:
+       - name: sales
+         identifier: raw_gz_sales
+         description: "sales data"
+         columns:
+           - name: date_date
+             description : "date of sale"
+           - name: orders_id
+             description : "identifier for the order"
+           - name: pdt_id
+             description : "product identifier"
+           - name: revenue
+             description : "renevue generated"
+           - name: quantity
+             description : quantity products purchased
+        
+       - name: product
+         identifier: raw_gz_product
+         description: "product data"
+         columns:
+           - name: products_id
+             description : "product identifier"
+             tests:
+               - unique
+               - not_null
+               
+           - name: purchse_price
+             description : "price per product"
+       - name: ship
+         identifier: raw_gz_ship
+         description: "ship data"
+         columns:
+           - name: orders_id
+             description : "identifier for the order"
+             tests:
+               - unique
+               - not_null
+           - name: shipping_fee
+             description : "shipping fee charged to customer"
+           - name: logcost
+             description : "logistical costs"
+           - name: ship_cost
+             description : "ship_cost"
+ models: 
+    - name: int_orders_margin
+      description: "adding margin and purchase cost and aggregating by order"
+      columns:
+        - name: orders_id
+          description: "orders id"
+          tests:
+            - unique
+            - not_null
+           
+    - name: int_sales_margin
+      description: "adding margin and purchase cost to sales data"
+      columns:
+        - name: products_id
+          description: "product id"
+          tests:
+            - not_null 
+
+    - name: int_orders_operational
+      description: "adding operational margin to orders data"
+      columns:
+        - name: orders_id
+          description: "orders_id"
+          tests:
+                - not_null 
+                - unique
+
+    - name: finance_days
+      description: "aggregating relevant finance information by date"
+      columns:
+          - name: date
+            description: "date"
+            tests:
+                - not_null 
+                - unique
+                   
